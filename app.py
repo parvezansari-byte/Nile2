@@ -55,7 +55,6 @@ RELIANCE.NS,10,2450
 TCS.NS,5,3800
 HDFCBANK.NS,20,1650
 """
-)
 portfolio_rows = []
 
 for line in portfolio_text.strip().splitlines():
@@ -74,6 +73,8 @@ for line in portfolio_text.strip().splitlines():
         pass
 
 portfolio_df = pd.DataFrame(portfolio_rows)
+)
+
 # Fetch Data
 raw_df = get_history(symbol)
 
