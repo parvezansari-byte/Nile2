@@ -54,7 +54,9 @@ portfolio_text = st.sidebar.text_area(
 RELIANCE.NS,10,2450
 TCS.NS,5,3800
 HDFCBANK.NS,20,1650
-"""
+""",
+    height=150
+)
 portfolio_rows = []
 
 for line in portfolio_text.strip().splitlines():
