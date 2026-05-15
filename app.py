@@ -22,6 +22,11 @@ from ui.charts import (
     make_candlestick_chart,
     make_rsi_chart
 )
+from analytics.scoring import (
+    compute_score,
+    get_signal,
+    conviction_level
+)
 
 load_css()
 
@@ -37,6 +42,11 @@ symbol = st.sidebar.selectbox(
 raw_df = get_history(symbol)
 
 df = compute_indicators(raw_df)
+score = compute_score(df)
+
+signal = get_signal(score)
+
+conviction = conviction_level(score)
 
 info = get_info(symbol)
 
@@ -106,6 +116,27 @@ with left:
     )
 
 with right:
+    st.subheader("AI Institutional Engine")
+
+a1, a2, a3 = st.columns(3)
+
+with a1:
+    st.metric(
+        "Institutional Score",
+        f"{score}/100"
+    )
+
+with a2:
+    st.metric(
+        "AI Signal",
+        signal
+    )
+
+with a3:
+    st.metric(
+        "Conviction",
+        conviction
+    )
 
     st.plotly_chart(
         make_rsi_chart(df),
