@@ -159,7 +159,11 @@ if run_scan:
         scan_df,
         use_container_width=True
     )
-    pdf_data = generate_stock_report(
+ signal = get_signal(score)
+conviction = conviction_level(score)
+# PDF REPORT
+
+pdf_data = generate_stock_report(
     symbol=symbol,
     price=price,
     signal=signal,
@@ -167,8 +171,6 @@ if run_scan:
     conviction=conviction,
     rsi=df["RSI14"].iloc[-1]
 )
-    signal = get_signal(score)
-conviction = conviction_level(score)
 
 st.download_button(
     label="Download Institutional PDF Report",
@@ -176,3 +178,4 @@ st.download_button(
     file_name=f"{symbol}_report.pdf",
     mime="application/pdf"
 )
+
