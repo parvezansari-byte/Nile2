@@ -32,7 +32,7 @@ from ui.cards import (
     metric_card,
     signal_card
 )
-
+from reports.pdf_engine import generate_stock_report
 load_css()
 
 st.title("NILE V2")
@@ -159,3 +159,18 @@ if run_scan:
         scan_df,
         use_container_width=True
     )
+    pdf_data = generate_stock_report(
+    symbol=symbol,
+    price=price,
+    signal=signal,
+    score=score,
+    conviction=conviction,
+    rsi=df["RSI14"].iloc[-1]
+)
+
+st.download_button(
+    label="Download Institutional PDF Report",
+    data=pdf_data,
+    file_name=f"{symbol}_report.pdf",
+    mime="application/pdf"
+)
