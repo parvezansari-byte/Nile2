@@ -40,7 +40,7 @@ from analytics.relative_strength import (
 from analytics.sector_heatmap import (
     build_sector_heatmap
 )
-)
+
 load_css()
 
 st.title("NILE V2")
