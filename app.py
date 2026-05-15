@@ -27,6 +27,7 @@ from analytics.scoring import (
     get_signal,
     conviction_level
 )
+from analytics.scanner import run_scanner
 
 load_css()
 
@@ -36,6 +37,9 @@ st.title("NILE V2")
 symbol = st.sidebar.selectbox(
     "Select Stock",
     UNIVERSE
+)
+run_scan = st.sidebar.button(
+    "Run Institutional Scan"
 )
 
 # Fetch Data
@@ -140,5 +144,17 @@ with a3:
 
     st.plotly_chart(
         make_rsi_chart(df),
+        use_container_width=True
+    )
+if run_scan:
+
+    st.subheader("Institutional Scanner")
+
+    with st.spinner("Scanning market..."):
+
+        scan_df = run_scanner(UNIVERSE)
+
+    st.dataframe(
+        scan_df,
         use_container_width=True
     )
