@@ -37,6 +37,9 @@ from reports.pdf_engine import generate_stock_report
 from analytics.portfolio import analyze_portfolio
 from analytics.relative_strength import (
     build_rs_ranking
+from analytics.sector_heatmap import (
+    build_sector_heatmap
+)
 )
 load_css()
 
@@ -206,7 +209,16 @@ st.dataframe(
     rs_df.head(15),
     use_container_width=True
 )
+st.subheader("Sector Heatmap")
 
+sector_df = build_sector_heatmap(
+    UNIVERSE
+)
+
+st.dataframe(
+    sector_df,
+    use_container_width=True
+)
 # Portfolio Analytics
 
 if not portfolio_df.empty:
