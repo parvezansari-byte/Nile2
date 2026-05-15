@@ -7,9 +7,7 @@ from pages.scanner import (
     render_scanner
 )
 
-from pages.portfolio import (
-    render_portfolio
-)
+
 
 from pages.heatmap import (
     render_heatmap
@@ -115,25 +113,7 @@ elif page == "Heatmap":
 elif page == "Reports":
 
     render_reports()
-portfolio_rows = []
 
-for line in portfolio_text.strip().splitlines():
-
-    try:
-
-        parts = line.split(",")
-
-        portfolio_rows.append({
-            "Symbol": parts[0].strip(),
-            "Quantity": float(parts[1]),
-            "Avg Price": float(parts[2])
-        })
-
-    except Exception:
-        pass
-
-
-portfolio_df = pd.DataFrame(portfolio_rows)
 # Fetch Data
 raw_df = get_history(symbol)
 
@@ -259,46 +239,7 @@ st.dataframe(
     sector_df,
     use_container_width=True
 )
-# Portfolio Analytics
 
-if not portfolio_df.empty:
-
-    st.subheader("Portfolio Analytics")
-
-    portfolio_result, summary = analyze_portfolio(
-        portfolio_df
-    )
-
-    p1, p2, p3, p4 = st.columns(4)
-
-    with p1:
-        metric_card(
-            "Total Invested",
-            f"₹{summary['Total Invested']:,.0f}"
-        )
-
-    with p2:
-        metric_card(
-            "Portfolio Value",
-            f"₹{summary['Portfolio Value']:,.0f}"
-        )
-
-    with p3:
-        metric_card(
-            "Total P&L",
-            f"₹{summary['Total P&L']:,.0f}"
-        )
-
-    with p4:
-        metric_card(
-            "Return %",
-            f"{summary['Total P&L %']}%"
-        )
-
-    st.dataframe(
-        portfolio_result,
-        use_container_width=True
-    )
 # PDF REPORT
 signal = get_signal(score)
 
