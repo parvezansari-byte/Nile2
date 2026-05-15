@@ -28,6 +28,10 @@ from analytics.scoring import (
     conviction_level
 )
 from analytics.scanner import run_scanner
+from ui.cards import (
+    metric_card,
+    signal_card
+)
 
 load_css()
 
@@ -59,25 +63,25 @@ price, change = get_live_price(symbol)
 # Display
 st.subheader(symbol)
 
-col1, col2, col3 = st.columns(3)
+top1, top2, top3 = st.columns(3)
 
-with col1:
-    st.metric(
+with top1:
+    metric_card(
         "Live Price",
-        f"₹{price:.2f}" if price else "N/A",
+        f"₹{price:.2f}",
         f"{change:.2f}%"
     )
 
-with col2:
-    st.metric(
+with top2:
+    metric_card(
         "Sector",
         SECTOR_MAP.get(symbol, "Unknown")
     )
 
-with col3:
-    st.metric(
+with top3:
+    metric_card(
         "Market Cap",
-        info.get("marketCap", "N/A")
+        str(info.get("marketCap", "N/A"))
     )
 
 st.dataframe(df.tail())
@@ -122,22 +126,19 @@ with left:
 with right:
     st.subheader("AI Institutional Engine")
 
-a1, a2, a3 = st.columns(3)
+c1, c2, c3 = st.columns(3)
 
-with a1:
-    st.metric(
+with c1:
+    metric_card(
         "Institutional Score",
         f"{score}/100"
     )
 
-with a2:
-    st.metric(
-        "AI Signal",
-        signal
-    )
+with c2:
+    signal_card(signal)
 
-with a3:
-    st.metric(
+with c3:
+    metric_card(
         "Conviction",
         conviction
     )
