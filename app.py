@@ -218,14 +218,7 @@ with c3:
         use_container_width=True
     )
 
-    if not portfolio_df.empty:
-        st.subheader("Relative Strength Ranking")
-
-with st.spinner("Calculating momentum rankings..."):
-
-    rs_df = build_rs_ranking(
-        UNIVERSE
-    )
+   
 
 st.dataframe(
     rs_df.head(15),
