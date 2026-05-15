@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 from ui.styles import load_css
 
@@ -71,12 +72,11 @@ for line in portfolio_text.strip().splitlines():
             "Avg Price": float(parts[2])
         })
 
-    except:
+    except Exception:
         pass
 
+
 portfolio_df = pd.DataFrame(portfolio_rows)
-
-
 # Fetch Data
 raw_df = get_history(symbol)
 
