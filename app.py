@@ -189,7 +189,7 @@ if run_scan:
     )
     if not portfolio_df.empty:
 
-    st.subheader("Portfolio Analytics")
+     st.subheader("Portfolio Analytics")
 
     portfolio_result, summary = analyze_portfolio(
         portfolio_df
