@@ -167,6 +167,8 @@ if run_scan:
     conviction=conviction,
     rsi=df["RSI14"].iloc[-1]
 )
+    signal = get_signal(score)
+conviction = conviction_level(score)
 
 st.download_button(
     label="Download Institutional PDF Report",
