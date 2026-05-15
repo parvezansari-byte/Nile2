@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit.components.v1 as components
 
 
 def metric_card(title, value, delta=""):
@@ -11,6 +11,7 @@ def metric_card(title, value, delta=""):
         border:1px solid rgba(255,255,255,0.08);
         margin-bottom:10px;
         box-shadow:0 10px 25px rgba(0,0,0,0.25);
+        font-family:sans-serif;
     ">
 
         <div style="
@@ -41,9 +42,9 @@ def metric_card(title, value, delta=""):
     </div>
     """
 
-    st.markdown(
+    components.html(
         html,
-        unsafe_allow_html=True
+        height=170
     )
 
 
@@ -65,7 +66,7 @@ def signal_card(signal):
         padding:28px;
         border-radius:22px;
         text-align:center;
-        box-shadow:0 10px 25px rgba(0,0,0,0.25);
+        font-family:sans-serif;
     ">
 
         <div style="
@@ -79,7 +80,7 @@ def signal_card(signal):
     </div>
     """
 
-    st.markdown(
+    components.html(
         html,
-        unsafe_allow_html=True
+        height=140
     )
