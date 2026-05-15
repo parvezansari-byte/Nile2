@@ -18,6 +18,10 @@ st.set_page_config(
     page_icon="📈",
     layout="wide"
 )
+from ui.charts import (
+    make_candlestick_chart,
+    make_rsi_chart
+)
 
 load_css()
 
@@ -89,4 +93,21 @@ with c4:
     st.metric(
         "ATR14",
         round(df["ATR14"].iloc[-1], 2)
+    )
+st.subheader("Charts")
+
+left, right = st.columns([2, 1])
+
+with left:
+
+    st.plotly_chart(
+        make_candlestick_chart(df, symbol),
+        use_container_width=True
+    )
+
+with right:
+
+    st.plotly_chart(
+        make_rsi_chart(df),
+        use_container_width=True
     )
