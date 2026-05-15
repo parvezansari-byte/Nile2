@@ -36,7 +36,8 @@ from ui.cards import (
 from reports.pdf_engine import generate_stock_report
 from analytics.portfolio import analyze_portfolio
 from analytics.relative_strength import (
-    build_rs_ranking
+    build_rs_ranking 
+)
 from analytics.sector_heatmap import (
     build_sector_heatmap
 )
