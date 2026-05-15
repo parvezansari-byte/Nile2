@@ -207,7 +207,11 @@ st.dataframe(
     use_container_width=True
 )
 
-     st.subheader("Portfolio Analytics")
+# Portfolio Analytics
+
+if not portfolio_df.empty:
+
+    st.subheader("Portfolio Analytics")
 
     portfolio_result, summary = analyze_portfolio(
         portfolio_df
