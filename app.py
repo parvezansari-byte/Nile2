@@ -7,7 +7,9 @@ from pages.scanner import (
     render_scanner
 )
 
-
+from pages.portfolio import (
+    render_portfolio
+)
 
 from pages.heatmap import (
     render_heatmap
