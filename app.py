@@ -35,6 +35,9 @@ from ui.cards import (
 )
 from reports.pdf_engine import generate_stock_report
 from analytics.portfolio import analyze_portfolio
+from analytics.relative_strength import (
+    build_rs_ranking
+)
 load_css()
 
 st.title("NILE V2")
@@ -191,6 +194,18 @@ if run_scan:
         use_container_width=True
     )
     if not portfolio_df.empty:
+        st.subheader("Relative Strength Ranking")
+
+with st.spinner("Calculating momentum rankings..."):
+
+    rs_df = build_rs_ranking(
+        UNIVERSE
+    )
+
+st.dataframe(
+    rs_df.head(15),
+    use_container_width=True
+)
 
      st.subheader("Portfolio Analytics")
 
