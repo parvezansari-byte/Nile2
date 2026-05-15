@@ -1,4 +1,23 @@
 import streamlit as st
+from pages.dashboard import (
+    render_dashboard
+)
+
+from pages.scanner import (
+    render_scanner
+)
+
+from pages.portfolio import (
+    render_portfolio
+)
+
+from pages.heatmap import (
+    render_heatmap
+)
+
+from pages.reports import (
+    render_reports
+)
 import pandas as pd
 
 from ui.styles import load_css
@@ -65,6 +84,37 @@ HDFCBANK.NS,20,1650
 """,
     height=150
 )
+st.sidebar.title("NILE V2")
+
+page = st.sidebar.radio(
+    "Navigation",
+    [
+        "Dashboard",
+        "Scanner",
+        "Portfolio",
+        "Heatmap",
+        "Reports"
+    ]
+)
+if page == "Dashboard":
+
+    render_dashboard()
+
+elif page == "Scanner":
+
+    render_scanner()
+
+elif page == "Portfolio":
+
+    render_portfolio()
+
+elif page == "Heatmap":
+
+    render_heatmap()
+
+elif page == "Reports":
+
+    render_reports()
 portfolio_rows = []
 
 for line in portfolio_text.strip().splitlines():
