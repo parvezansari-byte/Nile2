@@ -12,7 +12,7 @@ from data.market_data import (
     get_info,
     get_live_price
 )
-
+from analytics.indicators import compute_indicators
 st.set_page_config(
     page_title="Nile V2",
     page_icon="📈",
@@ -30,7 +30,9 @@ symbol = st.sidebar.selectbox(
 )
 
 # Fetch Data
-df = get_history(symbol)
+raw_df = get_history(symbol)
+
+df = compute_indicators(raw_df)
 
 info = get_info(symbol)
 
@@ -61,3 +63,30 @@ with col3:
     )
 
 st.dataframe(df.tail())
+st.subheader("Technical Indicators")
+
+c1, c2, c3, c4 = st.columns(4)
+
+with c1:
+    st.metric(
+        "RSI 14",
+        round(df["RSI14"].iloc[-1], 2)
+    )
+
+with c2:
+    st.metric(
+        "SMA20",
+        round(df["SMA20"].iloc[-1], 2)
+    )
+
+with c3:
+    st.metric(
+        "SMA50",
+        round(df["SMA50"].iloc[-1], 2)
+    )
+
+with c4:
+    st.metric(
+        "ATR14",
+        round(df["ATR14"].iloc[-1], 2)
+    )
