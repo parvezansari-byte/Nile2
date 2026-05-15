@@ -235,18 +235,7 @@ with c3:
         make_rsi_chart(df),
         use_container_width=True
     )
-if run_scan:
 
-    st.subheader("Institutional Scanner")
-
-    with st.spinner("Scanning market..."):
-
-        scan_df = run_scanner(UNIVERSE)
-
-    st.dataframe(
-        scan_df,
-        use_container_width=True
-    )
     if not portfolio_df.empty:
         st.subheader("Relative Strength Ranking")
 
