@@ -1,49 +1,48 @@
 import streamlit as st
 
 
-def metric_card(
-    title,
-    value,
-    delta=None
-):
+def metric_card(title, value, delta=""):
+
+    html = f"""
+    <div style="
+        background: rgba(15,23,42,0.75);
+        padding:20px;
+        border-radius:20px;
+        border:1px solid rgba(255,255,255,0.08);
+        margin-bottom:10px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    ">
+
+        <div style="
+            color:#94a3b8;
+            font-size:14px;
+            font-weight:600;
+        ">
+            {title}
+        </div>
+
+        <div style="
+            color:white;
+            font-size:30px;
+            font-weight:800;
+            margin-top:10px;
+        ">
+            {value}
+        </div>
+
+        <div style="
+            color:#22c55e;
+            margin-top:6px;
+            font-size:14px;
+        ">
+            {delta}
+        </div>
+
+    </div>
+    """
 
     st.markdown(
-        f"""
-        <div style="
-            background: rgba(15,23,42,0.7);
-            padding:20px;
-            border-radius:20px;
-            border:1px solid rgba(255,255,255,0.08);
-            margin-bottom:10px;
-        ">
-
-            <div style="
-                color:#94a3b8;
-                font-size:14px;
-                font-weight:600;
-            ">
-                {title}
-            </div>
-
-            <div style="
-                color:white;
-                font-size:28px;
-                font-weight:800;
-                margin-top:10px;
-            ">
-                {value}
-            </div>
-
-            <div style="
-                color:#22c55e;
-                margin-top:6px;
-                font-size:14px;
-            ">
-                {delta if delta else ""}
-            </div>
-
-        </div>
-        """,
+        html,
         unsafe_allow_html=True
     )
 
@@ -59,25 +58,28 @@ def signal_card(signal):
 
     color = colors.get(signal, "#94a3b8")
 
-    st.markdown(
-        f"""
+    html = f"""
+    <div style="
+        background:{color}20;
+        border:1px solid {color};
+        padding:28px;
+        border-radius:22px;
+        text-align:center;
+        box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    ">
+
         <div style="
-            background:{color}20;
-            border:1px solid {color};
-            padding:24px;
-            border-radius:22px;
-            text-align:center;
+            color:{color};
+            font-size:34px;
+            font-weight:900;
         ">
-
-            <div style="
-                color:{color};
-                font-size:32px;
-                font-weight:900;
-            ">
-                {signal}
-            </div>
-
+            {signal}
         </div>
-        """,
+
+    </div>
+    """
+
+    st.markdown(
+        html,
         unsafe_allow_html=True
     )
